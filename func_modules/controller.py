@@ -1,6 +1,6 @@
 import networkx as nx
 import pandas as pd
-from .functionalities_34 import func_3
+from .functionalities_34 import func_3, func_4
 
 
 class ControllerGraph:
@@ -11,7 +11,7 @@ class ControllerGraph:
         if num_heroes:
             try:  # This try and except clause allows us to understand the graph we are dealing with
                 graph = graph.subgraph([x for x in graph.nodes if x in self.top_heroes[:num_heroes] or
-                                        graph.nodes[x]['type'] == 'comic']) # Filter the heroes (not the comics)
+                                        graph.nodes[x]['type'] == 'comic'])  # Filter the heroes (not the comics)
             except KeyError:
                 graph = graph.subgraph([x for x in graph.nodes if x in self.top_heroes[:num_heroes]])  # Filter heroes
         if id == 1:
@@ -21,7 +21,7 @@ class ControllerGraph:
         elif id == 3:
             return func_3(graph, kwargs['seq'], kwargs['endpoints'])
         elif id == 4:
-            pass
+            return func_4(graph, kwargs['hero_1'], kwargs['hero_2'])
         elif id == 5:
             pass
         else:
