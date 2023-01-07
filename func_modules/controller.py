@@ -1,6 +1,9 @@
 import networkx as nx
 import pandas as pd
 from .functionalities_34 import func_3, func_4
+from .function21 import func1
+from .functionality_2 import func2
+from.functionalities_5 import func_5
 
 
 class ControllerGraph:
@@ -11,6 +14,7 @@ class ControllerGraph:
     The `functionality` method is the core of the class, allowing to call each of the five class in a compact and
     consistent way.
     """
+
     def __init__(self, edges_df: pd.DataFrame) -> None:
         self.top_heroes = edges_df.groupby('hero').size().sort_values(ascending=False).index.tolist()
 
@@ -22,7 +26,6 @@ class ControllerGraph:
         :param num_heroes: The number of top heroes to consider to build a subgraph to work on. If not passed, the
             functionalities work on the complete graph.
         :param kwargs: Additional keyword arguments which are then passed to the specific functionalities.
-        :return:
         """
         if num_heroes:
             try:  # This try and except clause allows us to understand the graph we are dealing with
@@ -31,14 +34,14 @@ class ControllerGraph:
             except KeyError:
                 graph = graph.subgraph([x for x in graph.nodes if x in self.top_heroes[:num_heroes]])  # Filter heroes
         if id == 1:
-            pass
+            return func1(graph, kwargs['graph_type'])
         elif id == 2:
-            pass
+            return func2(graph, kwargs['hero'], kwargs['metric'])
         elif id == 3:
             return func_3(graph, kwargs['seq'], kwargs['endpoints'])
         elif id == 4:
             return func_4(graph, kwargs['hero_1'], kwargs['hero_2'])
         elif id == 5:
-            pass
+            return func_5(graph, kwargs['hero_1'], kwargs['hero_2'])
         else:
             raise ValueError('There is no functionality for the chosen id.')
