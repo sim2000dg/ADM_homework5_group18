@@ -10,3 +10,4 @@ The contents of the repository are this way defined:
 - The usual `main.ipynb` file which is the main notebook. The visualization/front-end part of the homework was done directly there.
 - `func_modules` is the package containing the requested functionalities (i.e. the backend part of the homework).
 - The `CommandLine.sh` file is the file containing the solution for the command line question.
+- `partial_notebooks` contains the notebooks which were used to build the main one.

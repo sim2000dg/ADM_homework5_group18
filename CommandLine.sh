@@ -5,21 +5,21 @@
 
 #Run the file 
 #./command1A.sh
-rows=`sed -n '$=' "/Users/mattia/Desktop/ADM(Aris)/HM5/Data/hero-network.csv"`
+rows=`sed -n '$=' "hero-network.csv"`
 
 # Goal of this command line: What is the most popular pair of heroes (often appearing together in the comics)?
 # Description:
-# This command line question is splitted in two parts that are:
+# This command line question is split in two parts that are:
 # - Construction of the dataset (file command1A.sh)
 # - Research of the most popular pair of heroes (file command1B.sh)
 
 
 # Construction of the dataset:
 # In this script using a while loop we iterate on the dataset and create a dataset called pair.txt that contain
-# the name of the pair sorted in alfabetical order.
+# for each pair, the elements of the pair sorted in alphabetical order
 
-# NOTE : we will work on a preprocess dataset not "hero-network.csv".
-# The only difference in those data is that sephero_network use ; as separator and not ,
+# NOTE : we will work on a preprocess dataset, not "hero-network.csv".
+# The only difference in that dataset is that "sephero_network" uses ";" as separator and not ","
 
 a=1
 b=1
@@ -41,9 +41,7 @@ if (($a > $rows))                      #If statement create to stop the loop
 then 
     break;
     fi;
-done < "/Users/mattia/Desktop/ADM(Aris)/HM5/Data/sephero_network.csv" > pair.txt   #store in a new dataset
-
-
+done < "sephero_network.csv" > pair.txt   #store in a new dataset
 
 
 #Change the permits in order to execute the file.
@@ -57,7 +55,7 @@ done < "/Users/mattia/Desktop/ADM(Aris)/HM5/Data/sephero_network.csv" > pair.txt
 # We simply used AWK in order to count all the couples.
 
 #Most popular couple of heroes
-awk -F"\t" 'NR > 0 {arr[$1]++; spend[$1] += 1}END{for (a in arr) print a ","  sprintf("%.0f", spend[a]);}' "/Users/mattia/Desktop/ADM(Aris)/HM5/pair.txt" | sort -t ',' -k2 -nr > most_popular_heroes.csv
+awk -F"\t" 'NR > 0 {arr[$1]++; spend[$1] += 1}END{for (a in arr) print a ","  sprintf("%.0f", spend[a]);}' "pair.txt" | sort -t ',' -k2 -nr > most_popular_heroes.csv
 
 ##print the first 5
 head -10 most_popular_heroes.csv
@@ -72,12 +70,12 @@ head -10 most_popular_heroes.csv
 #./command2.sh
 
 # We simply used AWK in order to count all of comics per hero.
-# NOTE : we will work on a preprocess dataset not "sepedges.csv".
-# The only difference in those data is that edges use ; as separator and not ,
+# NOTE : we will work on a preprocess dataset, "sepedges.csv".
+# The only difference in that dataset is that edges use ";" as separator and not ","
 
 
 #Find the number of comics per hero.
-awk -F";" 'NR > 1 {arr[$2]++; spend[$2] += 1}END{for (a in arr) print a ","  sprintf("%.0f", spend[a]);}' "/Users/mattia/Desktop/ADM(Aris)/HM5/Data/sepedges.csv" | sort -t ',' -k2 -nr > comics_per_hero.csv
+awk -F";" 'NR > 1 {arr[$2]++; spend[$2] += 1}END{for (a in arr) print a ","  sprintf("%.0f", spend[a]);}' "sepedges.csv" | sort -t ',' -k2 -nr > comics_per_hero.csv
 
 ##print the first 5
 head -10 comics_per_hero.csv
@@ -90,11 +88,11 @@ head -10 comics_per_hero.csv
 #./command3.sh
 
 # We simply used AWK in order to count all of comics per hero, after that the compute the mean.
-# NOTE : we will work on a preprocess dataset not "sepedges.csv".
-# The only difference in those data is that edges use ; as separator and not ,
+# NOTE : we will work on a preprocess dataset, "sepedges.csv".
+# The only difference in that dataset is that edges use ";" as separator and not ","
 
 
 #The average number of heroes in comics.
-awk -F';' 'NR > 1 {arr[$3]++; spend[$3] += 1}END{for (a in arr) print a ";"  sprintf("%.0f", spend[a]);}' "/Users/mattia/Desktop/ADM(Aris)/HM5/Data/sepedges.csv" | sort -t ',' -k2 -nr | awk -F';' 'NR > 0 {count[a]++ ; spend[a] += $2}END{for (i in count) print "Average number of heroes in comics: " spend[i]/count[i]}'
+awk -F';' 'NR > 1 {arr[$3]++; spend[$3] += 1}END{for (a in arr) print a ";"  sprintf("%.0f", spend[a]);}' "sepedges.csv" | sort -t ',' -k2 -nr | awk -F';' 'NR > 0 {count[a]++ ; spend[a] += $2}END{for (i in count) print "Average number of heroes in comics: " spend[i]/count[i]}'
 
 
