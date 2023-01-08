@@ -8,13 +8,20 @@ import networkx as nx
 # (also chosen by the user)
 
 def func2(graph, hero, metric):
+    # Check whether the graph is weighted or unweighted
+    try:
+        weighted = True
+        nx.get_edge_attributes(graph, 'weight')
+    except KeyError:
+        weighted = False
+
     # We calculate the metric for the entire graph
     if metric == 'betweenness_centrality':
-        metric_values = nx.betweenness_centrality(graph)  # if the user chooses the betweenness centrality metric
+        metric_values = nx.betweenness_centrality(graph, weight='weight' if weighted else None)  # if the user chooses the betweenness centrality metric
     elif metric == 'pagerank':
-        metric_values = nx.pagerank_numpy(graph)  # if the user chooses the pagerank metric
+        metric_values = nx.pagerank_numpy(graph, weight='weight' if weighted else None)  # if the user chooses the pagerank metric
     elif metric == 'closeness_centrality':
-        metric_values = nx.closeness_centrality(graph)  # if the user chooses the closeness centrality metric
+        metric_values = nx.closeness_centrality(graph, distance='weight' if weighted else None)  # if the user chooses the closeness centrality metric
     elif metric == 'degree_centrality':
         metric_values = nx.degree_centrality(graph)  # if the user chooses the degree centrality metric
     else:
