@@ -1,4 +1,4 @@
-# Repository for the 5th Homework of Algorithmic Methods for Data Mining (Group 18)
+# Repository for the 5th Homework of Algorithmic Methods of Data Mining (Group 18)
 
 The authors are: 
 - [Simone Di Gregorio](mailto:digregorio.2042237@studenti.uniroma1.it) / Matricola: 2042237
