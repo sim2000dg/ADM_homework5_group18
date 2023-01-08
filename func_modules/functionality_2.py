@@ -1,10 +1,8 @@
 import networkx as nx
 
-
 # This functionality produces the value of one of the possible metrics that the user can choose from
-# Betweeness Centrality, Page Rank, #Closeness Centrality and Degree Centrality; calculated on the entire graph or on
-# a subgraph made up of the N nodes (the number N is also #chosen by the user) that represent the heroes appearing in
-# the most number of comics. It produces also the value of the chosen metric #calculated on a specific hero
+# Betweeness Centrality, Page Rank, #Closeness Centrality and Degree Centrality.
+# It produces also the value of the chosen metric calculated on a specific hero
 # (also chosen by the user)
 
 def func2(graph, hero, metric):
