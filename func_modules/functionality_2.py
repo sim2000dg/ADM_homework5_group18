@@ -5,13 +5,13 @@ import networkx as nx
 # It produces also the value of the chosen metric calculated on a specific hero
 # (also chosen by the user)
 
+
 def func2(graph, hero, metric):
     # Check whether the graph is weighted or unweighted
-    try:
-        weighted = True
-        nx.get_edge_attributes(graph, 'weight')
-    except KeyError:
+    if not nx.get_edge_attributes(graph, 'weight'):
         weighted = False
+    else:
+        weighted = True
 
     # We calculate the metric for the entire graph
     if metric == 'betweenness_centrality':
@@ -24,10 +24,10 @@ def func2(graph, hero, metric):
         metric_values = nx.degree_centrality(graph)  # if the user chooses the degree centrality metric
     else:
         raise ValueError('Invalid metric')
-    
+
     # We calculate the metric for the given hero
     hero_metric_value = metric_values[hero]
-    
+
     return metric_values, hero_metric_value
 
-    
+

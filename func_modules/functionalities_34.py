@@ -90,12 +90,10 @@ def func_4(graph: nx.Graph, hero_1: str, hero_2: str) -> tuple[int, list[tuple[s
     :return: The number of edges removed, the list of edges removed and the subgraph obtained by removing the edges in
             the cut-set.
     """
-    # This try and except clause allows to understand the graph we are dealing with, if weighted undirected or
-    # unweighted undirected.
-    try:
-        nx.get_edge_attributes(graph, 'weight')
-    except KeyError:  # If it is unweighted the edges of the graph have the weight attribute added (homogeneous and = 1)
+    # This allows to understand the graph we are dealing with, if weighted undirected or unweighted undirected.
+    if not nx.get_edge_attributes(graph, 'weight'):  # If empty dictionary
         graph = graph.copy()  # Copy to avoid side effect
+        # If it is unweighted the edges of the graph have the weight attribute added (homogeneous and = 1)
         nx.set_edge_attributes(graph, values=1, name='weight')
 
     if not nx.has_path(graph, hero_1, hero_2):  # If source and sink are already disconnected nothing to do
